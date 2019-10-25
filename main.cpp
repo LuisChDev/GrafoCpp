@@ -3,6 +3,8 @@
 #define MAXGRAPH 21
 using namespace std;
 
+// Autor: Luis Eduardo Chavarriaga - T00056784
+
 /**
  * imprimir el grafo.
  * por cada fila con valor != 0, imprime las casillas que tengan
@@ -14,7 +16,7 @@ void printGraph(int grafo[MAXGRAPH][MAXGRAPH]) {
       cout << "( " << grafo[x][0] << " ): ";
       for (int y = 1; y < MAXGRAPH; y++) {
         if (grafo[x][y] != 0) {
-          cout << " ->"<< y + 1 << ": " << grafo[x][y] << ", ";
+          cout << " ->"<< grafo[0][y] << ": " << grafo[x][y] << ", ";
         }
       }
       cout << "\n";
@@ -81,14 +83,39 @@ void removeNode(int nodo, int grafo[MAXGRAPH][MAXGRAPH]) {
  * insertar un arco con valor 0 es equivalente a eliminarlo.
  */
 void insertArch (int nodo1, int nodo2, int arco, int grafo[MAXGRAPH][MAXGRAPH]) {
-  grafo[nodo1 - 1][nodo2 - 1] = arco;
+  for (int x = 0; x < MAXGRAPH; x++) {
+    if (grafo[x][0] == nodo1) {
+      for (int y = 0; y < MAXGRAPH; y++) {
+        if (grafo[0][y] == nodo2) {
+          grafo[x][y] = arco;
+          return;
+        }
+      }
+      cout << "Lo sentimos, el segundo nodo no se encuentra en el grafo" << endl;
+      return;
+    }
+  }
+  cout << "Lo sentimos, el primer nodo no se encuentra en el grafo" << endl;
 }
 
 /**
  * elimina un nodo del arco.
  */
 void deleteArch (int nodo1, int nodo2, int grafo[MAXGRAPH][MAXGRAPH]) {
-  grafo[nodo1 - 1][nodo2 - 1] = 0;
+  for (int x = 0; x < MAXGRAPH; x++) {
+    if (grafo[x][0] == nodo1) {
+      for (int y = 0; y < MAXGRAPH; y++) {
+        if (grafo[0][y] == nodo2) {
+          grafo[x][y] = 0;
+          return;
+        }
+      }
+      cout << "Lo sentimos, el segundo nodo no se encuentra en el grafo"
+           << endl;
+      return;
+    }
+  }
+  cout << "Lo sentimos, el primer nodo no se encuentra en el grafo" << endl;
 }
 
 
@@ -96,7 +123,20 @@ void deleteArch (int nodo1, int nodo2, int grafo[MAXGRAPH][MAXGRAPH]) {
  * Verifica si existe un arco entre dos nodos dados.
  */
 int arcoNodos(int nodo1, int nodo2, int grafo[MAXGRAPH][MAXGRAPH]) {
-  return grafo[nodo1 - 1][nodo2 - 1];
+  for (int x = 0; x < MAXGRAPH; x++) {
+    if (grafo[x][0] == nodo1) {
+      for (int y = 0; y < MAXGRAPH; y++) {
+        if (grafo[0][y] == nodo2) {
+          return grafo[x][y];
+        }
+      }
+      cout << "Lo sentimos, el segundo nodo no se encuentra en el grafo"
+           << endl;
+      return 0;
+    }
+  }
+  cout << "Lo sentimos, el primer nodo no se encuentra en el grafo" << endl;
+  return 0;
 }
 
 
@@ -147,6 +187,7 @@ int main() {
       cout << "por favor ingrese el nodo a eliminar: " << endl;
       cin >> input;
       removeNode(input, grafo);
+      break;
 
     case 4:
       cout << "por favor ingrese el primer nodo: " << endl;
