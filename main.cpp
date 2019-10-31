@@ -32,10 +32,17 @@ int main() {
   cout << "Ingrese 5 para eliminar un arco." << endl;
   cout << "Ingrese 6 para averiguar si un arco existe." << endl;
   cout << "ingrese 7 para ver todos los valores." << endl;
-  cout << "Ingrese 8 para salir." << endl;
+  cout << "Ingrese 8 para imprimir los contenidos del grafo en orden"
+          " de búsqueda por profundidad."
+       << endl;
+  cout << "Ingrese 9 para imprimir los contenidos del grafo en orden"
+          " de búsqueda por anchura."
+       << endl;
+  cout << "Ingrese 10 para imprimir esta lista de comandos." << endl;
+  cout << "Ingrese 11 para salir." << endl;
 
   do {
-    cout << "Ingrese su comando." << endl;
+    cout << "Ingrese su comando. (10 para ver comandos)" << endl;
     cin >> option;
 
     switch (option) {
@@ -90,12 +97,55 @@ int main() {
       printAll(grafo);
       break;
 
+    case 8:
+      cout << "Ingrese el nodo de inicio: " << endl;
+      cin >> input;
+      if (isInGraph(input, grafo)) {
+        cout << "El grafo está compuesto de los siguentes elementos: " << endl;
+        DFS(input, grafo);
+      } else {
+        cout << "Lo sentimos, este nodo no se encuentra en el grafo." << endl;
+      }
+      break;
+
+    case 9:
+      cout << "Ingrese el nodo de inicio: " << endl;
+      cin >> input;
+      if (isInGraph(input, grafo)) {
+        cout << "El grafo está compuesto de los siguentes elementos: " << endl;
+        BFS(input, grafo);
+      } else {
+        cout << "Lo sentimos, este nodo no se encuentra en el grafo." << endl;
+      }
+      break;
+
+    case 10:
+      cout << "Ingrese 1 para imprimir el grafo." << endl;
+      cout << "Ingrese 2 para insertar un nodo." << endl;
+      cout << "Ingrese 3 para eliminar un nodo." << endl;
+      cout << "Ingrese 4 para insertar un arco." << endl;
+      cout << "Ingrese 5 para eliminar un arco." << endl;
+      cout << "Ingrese 6 para averiguar si un arco existe." << endl;
+      cout << "ingrese 7 para ver todos los valores." << endl;
+      cout << "Ingrese 8 para imprimir los contenidos del grafo en orden"
+              " de búsqueda por profundidad."
+           << endl;
+      cout << "Ingrese 9 para imprimir los contenidos del grafo en orden"
+              " de búsqueda por anchura."
+           << endl;
+      cout << "Ingrese 10 para imprimir esta lista de comandos." << endl;
+      cout << "Ingrese 11 para salir." << endl;
+      break;
+
+    case 11:
+      break;
+
     default:
       cout << "Esta opción no es válida. Ingrese una opción válida." << endl;
       cin.clear();
       cin.ignore();
     }
-  } while (option != 8);
+  } while (option != 11);
   cout << "gracias por usar el programa." << endl;
   return 0;
 }

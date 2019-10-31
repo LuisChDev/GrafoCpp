@@ -50,16 +50,17 @@ struct queue {
  */
 void enqueue(int nodo, queue &fila) {
   if ((fila.top + 1) % fila.capacity != fila.bottom) {
-    fila.top = (fila.top + 1) % fila.capacity;
     fila.array[fila.top] = nodo;
+    fila.top = (fila.top + 1) % fila.capacity;
   } else {
     cout << "Error: fila llena" << endl;
   }
 }
 
 int dequeue(queue &fila) {
-  if ((fila.bottom + 1) % fila.capacity <= fila.top) {
+  if ((fila.bottom + 1) % fila.capacity != fila.top + 1) {
     int valor = fila.array[fila.bottom];
+    fila.array[fila.bottom] = 0;
     fila.bottom = (fila.bottom + 1) % fila.capacity;
     return valor;
   } else {
@@ -67,7 +68,6 @@ int dequeue(queue &fila) {
     return 0;
   }
 }
-
 /**
  * busca un elemento en el arreglo dado.
  */
@@ -107,7 +107,7 @@ void DFS(int inicial, int grafo[MAXGRAPH][MAXGRAPH]) {
       visitados[actual] = current;
       actual++;
       // se imprime.
-      cout << current << " - " << endl;
+      cout << current << " - ";
       // cada nodo que tenga una conexión con este,
       // y no ha sido visitado, se añade al stack.
       for (int i = 0; i < MAXGRAPH; i++) {
@@ -118,6 +118,7 @@ void DFS(int inicial, int grafo[MAXGRAPH][MAXGRAPH]) {
       }
     }
   }
+  cout << endl;
 }
 
 
@@ -150,10 +151,11 @@ void BFS (int inicial, int grafo[MAXGRAPH][MAXGRAPH]) {
     // se añaden todos los nodos vecinos que no han sido visitados a la fila.
     for (int i = 0; i < MAXGRAPH; i++) {
       int nodo = arcoNodos(current, grafo[0][i], grafo);
-      if (nodo != 0 && !isIn(grafo[0][1], visitados)) {
+      if (nodo != 0 && !isIn(grafo[0][i], visitados)) {
         enqueue(grafo[0][i], aux);
       }
     }
   }
+  cout << endl;
 }
 

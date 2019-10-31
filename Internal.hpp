@@ -18,4 +18,6 @@ void deleteArch(int nodo1, int nodo2, int grafo[MAXGRAPH][MAXGRAPH]);
 
 int arcoNodos(int nodo1, int nodo2, int grafo[MAXGRAPH][MAXGRAPH]);
 
+bool isInGraph(int nodo, int grafo[MAXGRAPH][MAXGRAPH]);
+
 #endif

@@ -123,3 +123,19 @@ int arcoNodos(int nodo1, int nodo2, int grafo[MAXGRAPH][MAXGRAPH]) {
   cout << "Lo sentimos, el primer nodo no se encuentra en el grafo" << endl;
   return 0;
 }
+
+/**
+ * revisa si el nodo buscado está en el grafo o no.
+ */
+bool isInGraph(int nodo, int grafo[MAXGRAPH][MAXGRAPH]) {
+  for (int i = 0; i < MAXGRAPH; i++) {
+    if (nodo == grafo[i][0]) {
+      if (nodo == grafo[0][i]) {
+        return true;
+      } else {
+        cout << "hay un error en la implementación. revisar" << endl;
+      }
+    }
+  }
+  return false;
+}
